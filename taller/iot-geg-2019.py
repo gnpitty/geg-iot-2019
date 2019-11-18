@@ -1,4 +1,6 @@
-
+from pathlib import Path
+from time import sleep
+import uuid
 from time import sleep
 from google.cloud import storage
 
@@ -8,7 +10,7 @@ def tomaFoto( imagenFile):
     from picamera import PiCamera
     camera = PiCamera()
     camera.start_preview()
-    sleep(2)
+    sleep(5)
     camera.capture(imagenFile)
     camera.stop_preview()
 
@@ -16,11 +18,10 @@ def tomaFoto( imagenFile):
 def upload(imageFile):
     client = storage.Client()
     bucket = client.get_bucket(BUCKET100)
-    blob2  = bucket.blob('image3.jpg')
+    blob2  = bucket.blob(imageFile)
     blob2.upload_from_filename(filename=imageFile)
 
-file = "./image.jpg"
-
-#tomaFoto( file)
-upload(file)
+s3file =  str(uuid.uuid4().hex)+".jpg"
+tomaFoto( s3file)
+upload(s3file)
 
