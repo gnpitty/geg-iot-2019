@@ -6,6 +6,7 @@ from google.cloud import storage
 
 BUCKET100 = 'ejemplo_gncon_001'
 IMG_PATH = 'imagenes'
+DEBUG= True
 
 def tomaFoto( imagenFile):
     from picamera import PiCamera
@@ -24,7 +25,10 @@ def upload(imageFile):
     blob2.upload_from_filename(filename=file)
 
 s3file =  str(uuid.uuid4().hex)+".jpg"
-print ('Procesando:'+s3file)
-tomaFoto( s3file)
+print ('Procesando: '+s3file)
+#tomaFoto( s3file)
+if DEBUG:
+    s3file = 'image.jpg'
+
 upload(s3file)
 
