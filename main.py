@@ -53,7 +53,7 @@ def detect_faces_uri(uri):
     publish_message(project_id, topic_name,mensaje)
 
 #Funcion principal de la GC-Function  
-def hello_gcs(event, context):
+def procesa_imagen(event, context):
     """Triggered by a change to a Cloud Storage bucket.
     Args:
          event (dict): Event payload.
