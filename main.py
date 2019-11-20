@@ -46,7 +46,7 @@ def detect_faces_uri(uri):
     # Names of likelihood from google.cloud.vision.enums
     #likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
     #                   'LIKELY', 'VERY_LIKELY')
-    mensaje1 = f"Faces total:{str(len(faces)}: {uri}")
+    mensaje1 = f"Faces total:{str(len(faces))}: {uri}"
     cloud_logger.info(mensaje1)
     mensaje = str.encode(mensaje1)
     topic_name = "geginfo"
