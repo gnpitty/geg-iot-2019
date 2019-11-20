@@ -6,7 +6,8 @@ import sys
 import os
 
 PREVIEW_DELAY=2
-BUCKET100 = 'ejemplo_gncon_001'
+#BUCKET100 = 'ejemplo_gncon_001'
+BUCKET100 = 'iot-geg-imagenes'
 IMG_PATH = 'imagenes'
 DEBUG= False
 
