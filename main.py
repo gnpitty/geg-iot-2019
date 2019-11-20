@@ -10,11 +10,16 @@ lg_handler = lg_client.get_default_handler()
 cloud_logger = logging.getLogger("cloudLogger")
 cloud_logger.setLevel(logging.DEBUG)
 cloud_logger.addHandler(lg_handler)
-cloud_logger.info("Informacion con tipo INFO, Version 2.0.1")
+cloud_logger.info("Informacion con tipo INFO, Version 2.0.4")
 cloud_logger.error("Informacion con tipo Error, para mensajes de error")
-
-## Prueba GIT num 600
-
+ 
+def publish_message(project_id, topic_name,data):
+    from google.cloud import pubsub_v1
+    publisher = pubsub_v1.PublisherClient()
+    topic_path = publisher.topic_path(project_id, topic_name)
+    future = publisher.publish(topic_path, data=data)
+    print(future.result())
+    
 def detect_faces_uri(uri):
     """Detects faces in the file located in Google Cloud Storage or the web."""
     print("URI:"+uri)
@@ -39,19 +44,13 @@ def detect_faces_uri(uri):
     # Names of likelihood from google.cloud.vision.enums
     #likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
     #                   'LIKELY', 'VERY_LIKELY')
-     
-    cloud_logger.info('Faces total:'+str(len(faces)))
-    #for face in faces:
-#        print('anger: {}'.format(likelihood_name[face.anger_likelihood]))
-#        print('joy: {}'.format(likelihood_name[face.joy_likelihood]))
-#        print('surprise: {}'.format(likelihood_name[face.surprise_likelihood]))
-#
-#        vertices = (['({},{})'.format(vertex.x, vertex.y)
-#                    for vertex in face.bounding_poly.vertices])
-#
-#        print('face bounds: {}'.format(','.join(vertices)))
-
-
+    mensaje1 =  'Faces total:'+str(len(faces))
+    cloud_logger.info(mensaje1)
+    mensaje = str.encode(mensaje1+":"+uri)
+    topic_name = "geginfo"
+    project_id = 'iot-geg-2019'
+    publish_message(project_id, topic_name,mensaje)
+  
 def hello_gcs(event, context):
     """Triggered by a change to a Cloud Storage bucket.
     Args:
@@ -65,6 +64,6 @@ def hello_gcs(event, context):
     detect_faces_uri( uri2)
    # detect_faces(event.data.medialink)
    
-    print(f"Processing file: {file['name']}.")
+  
 
     
