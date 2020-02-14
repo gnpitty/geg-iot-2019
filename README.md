@@ -1,4 +1,4 @@
-# geg-iot-2019
-Demo IOT GEG 2019 Chitre
+# Demo IoT utilizando servicio Vision desde serverless function.
+Demo IoT  
 
 Apliciacion Serverless para procesamiento de Imagenes
