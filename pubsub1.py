@@ -1,4 +1,7 @@
 from google.cloud import pubsub_v1
+"""
+Script para leer los mensajes de Pub/Sub de GCD
+"""
 
 # TODO project_id = "Your Google Cloud Project ID"
 # TODO topic_name = "Your Pub/Sub topic name"
