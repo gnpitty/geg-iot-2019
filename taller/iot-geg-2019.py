@@ -30,9 +30,10 @@ def capImageOSX(imagenFile):
     while(True):
       ret, frame = cap.read()
       rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
-      
       cv2.imshow('frame', rgb)
-      if cv2.waitKey(1) & 0xFF == ord('q'):
+      #if cv2.waitKey(5000) & 0xFF == ord('q'):
+      if cv2.waitKey(5000) :
+        print("Fin........") 
         out = cv2.imwrite(file, frame)
         break
 
@@ -50,10 +51,10 @@ def upload(imageFile):
 s3file =  str(uuid.uuid4().hex)+".jpg"
 print ('Procesando: '+s3file)
 
-if sys.platform == "darwin":
-    capImageOSX(s3file)
-else:
-    tomaFoto( s3file)
+#if sys.platform == "darwin":
+capImageOSX(s3file)
+#else:
+#    tomaFoto( s3file)
 
  
 

@@ -77,7 +77,7 @@ def receive_messages(project_id, subscription_name):
     # [END pubsub_subscriber_async_pull]
     # [END pubsub_quickstart_subscriber]
 
-subscription_name = 'my-sub'
+subscription_name = 'my-sub2020'
 #publish_messages(project_id, topic_name)
 #publish_message(project_id, topic_name,str.encode('Esta es una prueba 100'))
 receive_messages(project_id, subscription_name)

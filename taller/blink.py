@@ -9,7 +9,7 @@ GPIO.setup(canal, GPIO.OUT)
 
 # On
 conta = 18 
-pausa = .066666
+pausa = .5
 while conta > 0:
    print(conta)
    GPIO.output(canal, GPIO.LOW)
