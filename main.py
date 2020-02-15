@@ -13,7 +13,7 @@ lg_handler = lg_client.get_default_handler()
 cloud_logger = logging.getLogger("cloudLogger")
 cloud_logger.setLevel(logging.DEBUG)
 cloud_logger.addHandler(lg_handler)
-cloud_logger.info("**- Informacion con tipo INFO, Version 2.0.7")
+cloud_logger.info("**- Informacion con tipo INFO, Version 2.0.8")
 
 # publicacion de mensaje en servicio pub-sub
 def publish_message(project_id, topic_name,data):
