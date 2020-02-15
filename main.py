@@ -2,8 +2,11 @@ from google.cloud import vision
 import io
 import logging
 from google.cloud import logging as cloudlogging
- 
 
+topic_name = "geginfo"
+project_id = 'iot-geg-2019'
+
+# Inicializacion de Logger
 lg_client = cloudlogging.Client()
 
 lg_handler = lg_client.get_default_handler()
@@ -11,7 +14,6 @@ cloud_logger = logging.getLogger("cloudLogger")
 cloud_logger.setLevel(logging.DEBUG)
 cloud_logger.addHandler(lg_handler)
 cloud_logger.info("**- Informacion con tipo INFO, Version 2.0.7")
-#cloud_logger.error("Informacion con tipo Error, para mensajes de error")
 
 # publicacion de mensaje en servicio pub-sub
 def publish_message(project_id, topic_name,data):
@@ -28,29 +30,23 @@ def detect_faces_uri(uri):
     cloud_logger.info(f"detect_faces_uri:{uri}")
     from google.cloud import vision
     client = vision.ImageAnnotatorClient()
-    # [START vision_python_migration_image_uri]
+#   [START vision_python_migration_image_uri]
     image = vision.types.Image()
     image.source.image_uri = uri
     image.source.gcs_image_uri = uri
-
-    # [END vision_python_migration_image_uri]
+#   [END vision_python_migration_image_uri]
 
     response = client.face_detection(image=image)
     faces = response.face_annotations
-
-    objects = client.object_localization(
-        image=image).localized_object_annotations
+    objects = client.object_localization(image=image).localized_object_annotations
     #print('=' * 79)
     print('Number of objects found: {}'.format(len(objects)))    
 
-    # Names of likelihood from google.cloud.vision.enums
-    #likelihood_name = ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE',
-    #                   'LIKELY', 'VERY_LIKELY')
+    # Envia mensaje Pub/Sub
     mensaje1 = f"Faces total:{str(len(faces))}: {uri}"
     cloud_logger.info(mensaje1)
     mensaje = str.encode(mensaje1)
-    topic_name = "geginfo"
-    project_id = 'iot-geg-2019'
+    
     publish_message(project_id, topic_name,mensaje)
 
 #Funcion principal de la GC-Function  
