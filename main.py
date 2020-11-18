@@ -4,7 +4,7 @@ import logging
 from google.cloud import logging as cloudlogging
 
 topic_name = "geginfo"
-project_id = 'iot-geg-2020'
+project_id = 'iot-geg-2019'
 
 # Inicializacion de Logger
 lg_client = cloudlogging.Client()
